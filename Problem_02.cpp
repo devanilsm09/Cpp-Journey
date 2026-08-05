@@ -1,130 +1,154 @@
-/*/*
-==============================================================
-                    PROBLEM 02 - NUMBER ANALYZER
-==============================================================
 
-File Name:
-Problem_02.cpp
-
-Objective:
-Create a C++ program that analyzes a number entered by the user.
-
---------------------------------------------------------------
-Requirements
---------------------------------------------------------------
-
-Take one integer input from the user.
-
-Display the following:
-
-1. Original Number
-2. Reverse Number
-3. Check whether the number is Palindrome or not
-4. Check whether the number is Prime or not
-5. Count total digits
-6. Sum of digits
-7. Product of digits
-8. Factorial (only for non-negative numbers)
-9. Print multiplication table (1 to 10)
-10. Print Pattern
-    - If number is EVEN -> Print Half Pyramid
-    - If number is ODD  -> Print Inverted Half Pyramid
-
---------------------------------------------------------------
-Rules
---------------------------------------------------------------
-
-✔ Make a separate function for every operation.
-
-✔ Use function parameters.
-
-✔ Use return values wherever possible.
-
-✔ main() should only:
-   - Take input
-   - Call functions
-   - Print results
-
-✔ Do NOT use global variables.
-
-✔ Use loops wherever required.
-
---------------------------------------------------------------
-Functions You Should Create
---------------------------------------------------------------
-
-int reverseNumber(int n);
-
-bool isPalindrome(int n);
-
-bool isPrime(int n);
-
-int countDigits(int n);
-
-int sumDigits(int n);
-
-int productDigits(int n);
-
-int factorial(int n);
-
-void printTable(int n);
-
-void printPattern(int n);
-
---------------------------------------------------------------
-Sample Output
---------------------------------------------------------------
-
-Enter Number : 121
-
-Original Number : 121
-
-Reverse Number : 121
-
-Palindrome : Yes
-
-Prime : No
-
-Digits : 3
-
-Sum of Digits : 4
-
-Product of Digits : 2
-
-Factorial : 121! (Calculate normally)
-
-Table
-
-121 x 1 = 121
-121 x 2 = 242
-...
-121 x 10 = 1210
-
-Pattern (Odd Number)
-
-* * * * * * *
-* * * * * *
-* * * * *
-* * * *
-* * *
-* *
-*
-
---------------------------------------------------------------
-Difficulty
---------------------------------------------------------------
-
-⭐⭐☆
-
-Expected Time:
-45-60 Minutes
-
-GitHub File Name:
-Problem_02.cpp
-
-Git Commit Message:
-
-Solved Problem 02 - Number Analyzer
-
-==============================================================
-*/
+// ==============================================================
+//                     PROBLEM 02 - NUMBER ANALYZER
+// ==============================================================
+#include<iostream>
+using namespace std;
+int original(int n)
+{
+    return n;
+}
+int reverse(int n)
+{
+    int r =0;
+    while(n>0)
+    {
+        int ld=n%10;
+        r*=10;
+        r+=ld;
+        n/=10;
+    }
+    return r;
+}
+bool isPalindrome(int n)
+{
+    bool isPalindrome =true;
+    int ori =n;
+    int r =0;
+    while(n>0)
+    {
+        int ld=n%10;
+        r*=10;
+        r+=ld;
+        n/=10;
+    }
+    if(ori!=r)
+    {
+        return isPalindrome=false;
+    }
+    return true;
+}  
+bool isPrime(int n)
+{
+    bool isPrime=true;
+    for(int i =2;i<n;i++)
+    {
+        if(n%i==0)
+        {
+           return isPrime =false;
+        }  
+    }
+    return true;
+}
+int tDigit(int n)
+{
+    int count=0;
+   while(n>0)
+    {
+        count +=1;
+        n/=10;
+    }
+    return count;
+}  
+int sum(int n)
+{
+    int sum=0;
+    while(n>0)
+    {
+        int ld=n%10;
+        sum+=ld;
+        n/=10;
+    }
+    return sum;
+}  
+int product(int n)
+{
+    int pro=1;
+   while(n>0)
+    {
+        int ld=n%10;
+        pro*=ld;
+        n/=10;
+    }
+    return pro;
+}  
+int factorial(int n)
+{
+    int fac=1;
+    if(n>0)
+    {
+        for(int i=1;i<=n;i++)
+        {
+            fac*=i;
+        }
+        return fac;
+    }
+    else
+    return 0;
+}
+void table(int n)
+{
+    for(int i =0;i<=10;i++)
+    {
+        cout<<i<<" X "<<n<<" = "<<n*i<<endl;
+    }
+}
+void pattern (int n)
+{
+    if(n%2==0)
+    {
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-((i*2)-i-1);j++)
+            {
+                cout<<"  ";
+            }
+            for(int j=1;j<=i;j++)
+            {
+                cout<<"* ";
+            }
+            cout<<endl;
+        }
+    }
+    else 
+    {
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n-i+1;j++)
+            {
+                cout<<"* " ;
+            }
+            cout<<endl;
+        }
+    }
+} 
+int main()
+{
+    int n;
+    cout<<"Enter a number : ";
+    cin>>n;
+    cout<<endl;
+    cout<<"Original Number  - "<<original(n)<<endl;
+    cout<<"Reverse Number  - "<<reverse(n)<<endl;
+    cout<<"Is Palindrome  - "<<isPalindrome(n)<<endl;
+    cout<<"Is Prime  - "<<isPrime(n)<<endl;
+    cout<<"Total digits - "<<tDigit(n)<<endl;
+    cout<<"Sum of digits  - "<<sum(n)<<endl;
+    cout<<"Product of digits  - "<<product(n)<<endl;
+    cout<<"Factorial  - "<<factorial (n)<<endl;
+    cout<<"Multiplication table  - "<<endl;
+    table(n);
+    cout<<endl;
+    cout<<"Pattern Printing - "<<endl;
+    pattern(n);
+}
